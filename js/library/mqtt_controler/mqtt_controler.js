@@ -23,6 +23,15 @@ var options = {
 
 var client = mqtt.connect(broker, options);
 
+function move_agent(vehicle_type, target){
+  client.publish(ENVIRONEMENT + '/prod/user/path', {vehicle_type: vehicle_type, target: target});
+}
+
+function stop_agent(){
+  client.publish(ENVIRONEMENT +  '/prod/user/stop');
+}
+
+
 
 client.on('error', function (err) {
   console.log(err);
