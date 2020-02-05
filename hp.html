@@ -26,25 +26,25 @@
 <script>
 
 function Draw(){
-var img = document.getElementById("theImg");
-var cnvs = document.getElementById("myCanvas");
+    var img = document.getElementById("theImg");
+    var cnvs = document.getElementById("myCanvas");
 
-cnvs.style.position = "absolute";
-cnvs.left = img.width;
-cnvs.top = img.height;
+    cnvs.style.position = "absolute";
+    cnvs.left = img.width;
+    cnvs.top = img.height;
 
-var ctx = cnvs.getContext("2d");
+    var ctx = cnvs.getContext("2d");
 
-base_image = new Image();
-base_image.src = 'map.png';
-base_image.onload = function(){
-    ctx.drawImage(base_image, 0, 0,myCanvas.width,myCanvas.height);
-}
+    base_image = new Image();
+    base_image.src = 'map.png';
+    base_image.onload = function(){
+        ctx.drawImage(base_image, 0, 0,myCanvas.width,myCanvas.height);
+    }
 
-ctx.beginPath();
-ctx.arc(250, 210, 10, 0, 2 * Math.PI, false);
-ctx.lineWidth = 400;
-ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(250, 210, 10, 0, 2 * Math.PI, false);
+    ctx.lineWidth = 400;
+    ctx.stroke();
 }
 
 Draw();
