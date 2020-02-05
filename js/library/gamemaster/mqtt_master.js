@@ -58,8 +58,6 @@ function close_walk_road(edge_nb){
 }
 
 function weather(condition){
-    console.log(condition)
-    console.log(ENVIRONMENT)
     publish(ENVIRONMENT + '/prod/context/change/weather', {condition: condition});
 }
 
