@@ -7,8 +7,8 @@ function Request(url, method, body = null)
 {
     var xhr = new XMLHttpRequest();
     xhr.open(method, url, false);
-    xhr.setRequestHeader('Content-type', 'application/json'); 
-    
+    xhr.setRequestHeader('Content-type', 'application/json');
+
     if (body != null)
     {
         xhr.send(body);
@@ -23,8 +23,8 @@ function Request(url, method, body = null)
 
 function callApi(endpoint, method, body = null)
 {
-    var url = baseURL + endpoint;
-    return Request(url);
+    var url = baseURL.concat(endpoint);
+    return Request(url, method);
 }
 
-callApi("agent/api/user/situation/last", "GET");
+console.log(callApi("agent/api/user/situation/last", "GET"))
