@@ -6,7 +6,7 @@
     </head>
     <body>
             <div class="split right">
-            <canvas id="myCanvas" width=1000 height=1000>
+            <canvas id="myCanvas" width=1000 height=600>
                     <div class="map-div" id="theImg">
                         <img src="map.png" alt="Map">
                     </div>  
@@ -19,7 +19,7 @@
                     <p>Some text here too.</p>
                 </div>
              </div>
-    </body>>
+    </body>
 </html>
 
 
@@ -30,15 +30,15 @@ var img = document.getElementById("theImg");
 var cnvs = document.getElementById("myCanvas");
 
 cnvs.style.position = "absolute";
-cnvs.style.left = img.offsetLeft + "px";
-cnvs.style.top = img.offsetTop + "px";
+cnvs.left = img.width;
+cnvs.top = img.height;
 
 var ctx = cnvs.getContext("2d");
 
 base_image = new Image();
 base_image.src = 'map.png';
 base_image.onload = function(){
-    ctx.drawImage(base_image, 0, 0, window.innerWidth,window.innerHeight);
+    ctx.drawImage(base_image, 0, 0,myCanvas.width,myCanvas.height);
 }
 
 ctx.beginPath();
