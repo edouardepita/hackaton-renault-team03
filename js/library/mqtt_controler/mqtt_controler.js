@@ -33,9 +33,24 @@ client.on('connect', function () {
   console.log('client connected:' + clientId)
 });
 
-client.subscribe('team03/myteam/test', { qos: 0 });
 
-client.publish('team03/myteam/test', 'wss secure connection demo...!', { qos: 0, retain: false });
+function subscribe(channel)
+{
+    client.subscribe(ENVIRONMENT + channel, { qos: 0 })
+}
+
+subscribe('/prod/user/situation​')
+subscribe('/prod/user/mission​')
+subscribe('/prod/user/objective-reached')
+subscribe('/prod/user/status')
+subscribe('/prod/context/change/weather​')
+subscribe('/prod/context/change/air​')
+subscribe('/prod/environment/change/roads_status​​')
+subscribe('/prod/environment/change/lines_state​​')
+subscribe('/prod/environment/change/traffic_conditions​')
+subscribe('/prod/environment/change/breakdown​')
+
+//client.publish('team03/myteam/test', 'wss secure connection demo...!', { qos: 0, retain: false })
 
 client.on('message', function (topic, message, packet) {
   console.log('Received Message:= ' + message.toString() + '\nOn topic:= ' + topic)

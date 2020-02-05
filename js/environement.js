@@ -1,6 +1,6 @@
 
 //==== GENERAL ======
-var ENVIRONEMENT = 'team03';
+var ENVIRONMENT = 'team03';
 
  //======= MQTT VAR ======
 var BROKER_DOMAIN='mr1dns3dpz5mjj.messaging.solace.cloud';
