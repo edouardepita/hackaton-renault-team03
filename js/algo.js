@@ -1,4 +1,8 @@
 
+var env = "team03";
+
+var baseURL = "http://" + env + ".xp65.renault-digital.com/api/"
+
 function Request(url, method, body = null)
 {
     var xhr = new XMLHttpRequest();
@@ -13,8 +17,14 @@ function Request(url, method, body = null)
     {
         xhr.send();
     }
-    
+
     return xhr.responseText;
 }
 
-getRequest("http://team03.xp65.renault-digital.com/api/agent/api/user/situation/last");
+function callApi(endpoint, method, body = null)
+{
+    var url = baseURL + endpoint;
+    return Request(url);
+}
+
+callApi("agent/api/user/situation/last", "GET");
