@@ -112,6 +112,7 @@
     box-sizing: border-box;
     padding:20px;
     height: 54vh;
+    border-radius: 10px;
   }
 
   .event2-div{
@@ -121,7 +122,6 @@
 
   .pollution-div{
     width:50%;
-    display: flex;
   }
 
   .meteo-div{
@@ -138,14 +138,32 @@
   .pollution-pic{
     max-height: 210px;
   }
-  
-  .pollution-val-div,.pollution-pic-div{
-    display: flex;
-    align-items: center;
-  }
 
   .my-btn{
     font-family: "Montserrat"!important;
     font-weight: 700!important;
     font-size: 20px!important;
+  }
+
+  .pollution-txt{
+    text-align: center;
+    margin-top: 15px;
+    font-family: "Montserrat"!important;
+    font-weight: 700!important;
+    font-size: 20px!important;
+  }
+
+  .my-fa-times{
+    font-size: 10em!important;
+    color:red!important;
+  }
+
+  .Weather{
+    font-size: 8em!important;
+    /* color: yellow; */
+    padding-top: 10px;
+  }
+
+  .pollution-val-div{
+    text-align:center;
   }
