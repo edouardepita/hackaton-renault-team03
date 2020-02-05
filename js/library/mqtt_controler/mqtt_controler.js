@@ -99,17 +99,12 @@ var warning;
 
 client.on('message', function (topic, message, packet) {
     console.log('Received Message:= ' + message.toString() + '\nOn topic:= ' + topic);
-<<<<<<< HEAD
     var short_topic = topic.replace(ENVIRONMENT, "");
     var payload = null;
     const message_str = message.toString();
     if (message_str != "") {
       payload = JSON.parse(message.toString());
     }
-=======
-    var short_topic = topic.replace(ENVIRONMENT, "")
-    var payload = JSON.parse(message);
->>>>>>> 019006ed161b6562c67d46abb7d04a5427f5d3b8
     switch (short_topic)
     {
       case '/prod/user/mission':
