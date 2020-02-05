@@ -63,5 +63,6 @@ function getVehiculesInfo()
 }
 function getVehiculeInfo(id)
 {
+    //the id must be a string to avoid that 00000 becomes 0
     return callApi("vehicle/api/v1/vehicles/" + id, "GET");
 }
