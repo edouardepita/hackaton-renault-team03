@@ -74,16 +74,6 @@ subscribe('/prod/environment/change/breakdown​')
 subscribe('/prod/city/reset')
 subscribe('/prod/user/path-to-target')
 
-client.publish('team03/prod/city/reset', '', { qos: 0, retain: false })
-publish('/prod/user/path-to-target', {
-    "vehicle_type": "walk",
-    "path": [
-        [21, 5.6],
-        [20.9, 5.6]
-    ],
-    "costs": [0.0, 0.0]
-})
-
 //client.publish('team03/myteam/test', 'wss secure connection demo...!', { qos: 0, retain: false })
 
 client.on('message', function (topic, message, packet) {
