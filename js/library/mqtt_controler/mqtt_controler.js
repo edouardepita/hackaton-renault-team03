@@ -24,11 +24,11 @@ var options = {
 var client = mqtt.connect(broker, options);
 
 function move_agent(vehicle_type, target){
-  client.publish(ENVIRONMENT + '/prod/user/path', {vehicle_type: vehicle_type, target: target});
+  publish(ENVIRONMENT + '/prod/user/path', {vehicle_type: vehicle_type, target: target});
 }
 
 function stop_agent(){
-  client.publish(ENVIRONMENT +  '/prod/user/stop');
+  publish(ENVIRONMENT +  '/prod/user/stop');
 }
 
 
