@@ -98,9 +98,13 @@ var checkpoints;
 var warning;
 
 client.on('message', function (topic, message, packet) {
-    console.log('Received Message:= ' + message.toString() + '\nOn topic:= ' + topic)
-    var short_topic = topic.replace(ENVIRONMENT, "")
-    var payload = JSON.parse(message);
+    console.log('Received Message:= ' + message.toString() + '\nOn topic:= ' + topic);
+    var short_topic = topic.replace(ENVIRONMENT, "");
+    var payload = null;
+    const message_str = message.toString();
+    if (message_str != "") {
+      payload = JSON.parse(message.toString());
+    }
     switch (short_topic)
     {
       case '/prod/user/mission':
