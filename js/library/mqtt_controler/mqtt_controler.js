@@ -1,6 +1,6 @@
 var clientId = 'mqttjs_' + Math.random().toString(16).substr(2, 8)
 
-var broker = 'wss://mr1dns3dpz5mjj.messaging.solace.cloud:8443'
+var broker = BROKER_MQTT_HOST
 
 var options = {
   keepalive: 10,
