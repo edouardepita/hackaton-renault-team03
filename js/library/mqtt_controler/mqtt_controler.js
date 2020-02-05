@@ -24,11 +24,11 @@ var options = {
 var client = mqtt.connect(broker, options);
 
 function move_agent(vehicle_type, target){
-  client.publish(ENVIRONMENT + '/prod/user/path', {vehicle_type: vehicle_type, target: target});
+  publish(ENVIRONMENT + '/prod/user/path', {vehicle_type: vehicle_type, target: target});
 }
 
 function stop_agent(){
-  client.publish(ENVIRONMENT +  '/prod/user/stop');
+  publish(ENVIRONMENT +  '/prod/user/stop');
 }
 
 
@@ -48,6 +48,11 @@ function subscribe(channel)
     client.subscribe(ENVIRONMENT + channel, { qos: 0 })
 }
 
+function publish(channel, payload)
+{
+    client.publish(ENVIRONMENT + channel, JSON.stringify(payload), { qos: 0, retain: false })
+}
+
 subscribe('/prod/user/situation​')
 subscribe('/prod/user/mission​')
 subscribe('/prod/user/objective-reached')
@@ -58,8 +63,25 @@ subscribe('/prod/environment/change/roads_status​​')
 subscribe('/prod/environment/change/lines_state​​')
 subscribe('/prod/environment/change/traffic_conditions​')
 subscribe('/prod/environment/change/breakdown​')
+subscribe('/prod/city/reset')
+subscribe('/prod/user/path-to-target')
+
+client.publish('team03/prod/city/reset', '', { qos: 0, retain: false })
+publish('/prod/user/path-to-target', {
+    "vehicle_type": "walk",
+    "path": [
+        [21, 5.6],
+        [20.9, 5.6]
+    ],
+    "costs": [0.0, 0.0]
+})
 
 //client.publish('team03/myteam/test', 'wss secure connection demo...!', { qos: 0, retain: false })
+
+client.on('message', function (topic, message, packet) {
+  console.log('Received Message:= ' + message.toString() + '\nOn topic:= ' + topic)
+});
+
 
 client.on('message', function (topic, message, packet) {
   console.log('Received Message:= ' + message.toString() + '\nOn topic:= ' + topic)
