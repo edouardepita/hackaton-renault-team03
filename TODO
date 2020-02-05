@@ -1,0 +1,12 @@
+Pour la partie mqtt il y a un fénomène très étrange :
+ |->si on utiliser une fonction la publication ne se fait pas instantanément c'est extrement long et je sais pas pourquoi.
+ |  exemple :
+ |    client.publish("team03/prod/city/reset" ,"", { qos: 0, retain: false });   // Instantanément
+ |    publish(ENVIRONMENT +  '/prod/city/reset'); //Très long
+ |      |-> Alors que publish ne fait que appeler la ligne du dessus dans une fonction.
+ |
+ |-> Deuxième point : certain topic ne fonctionne pas ou partiellement :
+ |     |-> mission n'affiche jamais rien sauf si on réécrit en dur un connect
+       |-> Le status fonctionne mais n'affiche pas tout ( il ne s'actualise pas entre move et stop
+        
+
