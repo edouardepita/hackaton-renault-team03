@@ -22,18 +22,50 @@ function subway(){
 
 }
 
-function road(){
-
+function road(payload){
+    var json_payload = JSON.parse(payload)
+    publish(ENVIRONMENT + '/prod/city/morph/roads_status', json_payload);
 }
 
-function weather(){
+function close_car_road(edge_nb){
 
+    publish(ENVIRONMENT + '/prod/city/morph/roads_status', [
+      {
+            "car": [
+                      {"road": "edge_" + edge_nb, "state": "close"}
+                  ]
+      }]);
 }
 
-function air(){
+function close_bike_road(edge_nb){
 
+    publish(ENVIRONMENT + '/prod/city/morph/roads_status', [
+      {
+            "bike": [
+                      {"road": "edge_" + edge_nb, "state": "close"}
+                  ]
+      }]);
 }
 
+function close_walk_road(edge_nb){
+
+    publish(ENVIRONMENT + '/prod/city/morph/roads_status', [
+      {
+            "walk": [
+                      {"road": "edge_" + edge_nb, "state": "close"}
+                  ]
+      }]);
+}
+
+function weather(condition){
+    console.log(condition)
+    console.log(ENVIRONMENT)
+    publish(ENVIRONMENT + '/prod/context/change/weather', {condition: condition});
+}
+
+function air(condition){
+    publish(ENVIRONMENT + '/prod/context/change/air', {condition: condition});
+}
 
 function script_auto(){}
 
