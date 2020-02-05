@@ -31,6 +31,14 @@ function stop_agent(){
   publish(ENVIRONMENT +  '/prod/user/stop');
 }
 
+function reset(){
+  publish(ENVIRONMENT +  '/prod/city/reset');
+}
+
+function teleport_agent(vehicle_type, path, costs){
+  publish(ENVIRONMENT + '/prod/user/path-to-target', {vehicle_type: vehicle_type, path: path, costs: costs})
+}
+
 
 
 client.on('error', function (err) {
@@ -79,7 +87,23 @@ publish('/prod/user/path-to-target', {
 //client.publish('team03/myteam/test', 'wss secure connection demo...!', { qos: 0, retain: false })
 
 client.on('message', function (topic, message, packet) {
-  console.log('Received Message:= ' + message.toString() + '\nOn topic:= ' + topic)
+    console.log('Received Message:= ' + message.toString() + '\nOn topic:= ' + topic)
+    var short_topic = topic.replace(ENVIRONMENT, "")
+    switch (short_topic)
+    {
+      case '/prod/user/mission':
+      case '/prod/user/situation':
+      case '/user/objective-reached':
+      case '/user/status':
+      case '/context/change/weather':
+      case '/context/change/air':
+      case '/environment/change/roads_status':
+      case '/environment/change/lines_state':
+      case '/environment/change/traffic_conditions':
+      case '/prod/environment/change/breakdown':
+      case '/prod/city/reset':
+      case '/prod/user/path-to-target':
+    }
 });
 
 
