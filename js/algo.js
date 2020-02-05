@@ -29,7 +29,7 @@ function callApi(endpoint, method, body = null)
 }
 
 
-console.log("TEST CALL API AGENT SITUATION : " + callApi("agent/api/user/situation/last", "GET"))
+//console.log("TEST CALL API AGENT SITUATION : " + callApi("agent/api/user/situation/last", "GET"))
 
 //récupère la dernière situation connue de l'agent.
 function getAgentSituation()
@@ -111,3 +111,60 @@ function reset(method) {
     var endpoint = "graph/api/road_graph/reset_graph/".concat(method);
     return callApi(endpoint, 'POST');
 }
+
+
+function get_all_paths(positions) {
+    var agentPosition = JSON.parse(getAgentSituation())['position'];
+    var x = agentPosition['x'];
+    var y = agentPosition['y'];
+    var paths = new Array();
+    for (let i= 0; i < positions.length; i++)
+    {
+        var xi = positions[i]["x"];
+        var yi = positions[i]["y"];
+        var list = new Array();
+        list = verify_position(list, shortest_path_car(x,y,xi, yi), xi,yi)
+        list =  verify_position(list, shortest_path('subway', x,y, xi,yi), xi,yi)
+        if (JSON.parse(getCurrentWeather())['condition'] === 'normal') {
+            list = verify_position(shortest_path('walk',x,y,xi, yi),xi, yi);
+            if (JSON.parse(getCurrentAirQuality())['condition'] === 'normal') {
+                list = verify_position(shortest_path('bike', x, y, xi, yi),xi, yi);
+            }
+        }
+        x = xi;
+        y = yi;
+        paths.concat(list)
+    }
+    return paths;
+}
+
+function verify_position(list, json, x, y){
+    console.log(JSON.parse(json)['cars']['paths'])
+    var length = JSON.parse(json)['cars']['paths'].length;
+    var postion = JSON.parse(json)['cars']['paths'][length - 1];
+    if (Math.abs(postion['x']- x) < 1.5 && Math.abs(postion['y'] - y)) {
+        return list.concat(json);
+    }
+    return list;
+}
+
+function allPossibleCases(list){
+    if (list.length === 0){
+        return [];
+    }
+    else if (list.length === 1) {
+        return list[0];
+    }
+    else {
+        var result = [];
+        var rest = allPossibleCases(list.slice(1));
+        for (var c in rest) {
+            for(var i = 0; i < list[0].length; i++){
+                result.push(rest[c].unshift(list[0][i]));
+            }
+        }
+    return list;
+    }
+}
+
+
