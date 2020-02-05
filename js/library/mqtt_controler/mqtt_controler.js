@@ -1,9 +1,13 @@
-var client  = mqtt.connect('mqtt://test.mosquitto.org');
+var client  = mqtt.connect(BROKER_TCP_MQTTHOST, {'user' : BROKER_USER,  'password' : BROKER_PASSWORD,});
+
+var topic_test = ENVIRONEMENT + '/myteam/test';
 
 client.on('connect', function () {
-  client.subscribe('presence', function (err) {
+  client.subscribe( topic_test, function (err) {
     if (!err) {
-      client.publish('presence', 'Hello mqtt');
+      client.publish(topic_test, 'Hello mqtt');
+    } else {
+      alert('Erreur connexion à ' + topic_test);
     }
   })
 });
