@@ -27,4 +27,41 @@ function callApi(endpoint, method, body = null)
     return Request(url, method);
 }
 
-console.log(callApi("agent/api/user/situation/last", "GET"))
+console.log("TEST CALL API AGENT SITUATION : " + callApi("agent/api/user/situation/last", "GET"))
+
+function getAgentSituation()
+{
+    return callApi("agent/api/user/situation/last", "GET");
+}
+function getCurrentWeather()
+{
+    return callApi("context/api/context/weather/current", "GET");
+}
+function getCurrentAirQuality()
+{
+    return callApi("context/api/context/air/current", "GET");
+}
+function getSubwayStationsList()
+{
+    return callApi("graph/subway/stations", "GET");
+}
+function getTrafficConditions()
+{
+    return callApi("graph/road_graph/traffic_conditions", "GET");
+}
+function getRoadsStatus(transport)
+{
+    return callApi("graph/road_graph/roads_status/" + transport, "GET");
+}
+function getLineState()
+{
+    return callApi("graph/road_graph/line_state", "GET");
+}
+function getVehiculesInfo()
+{
+    return callApi("vehicle/api/v1/vehicles", "GET");
+}
+function getVehiculeInfo(id)
+{
+    return callApi("vehicle/api/v1/vehicles/" + id, "GET");
+}
