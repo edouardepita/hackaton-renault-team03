@@ -11,6 +11,7 @@ function Request(url, method, body = null)
 
     if (body != null)
     {
+        console.log(body);
         xhr.send(body);
     }
     else
@@ -24,8 +25,9 @@ function Request(url, method, body = null)
 function callApi(endpoint, method, body = null)
 {
     var url = baseURL.concat(endpoint);
-    return Request(url, method);
+    return Request(url, method, body);
 }
+
 
 console.log("TEST CALL API AGENT SITUATION : " + callApi("agent/api/user/situation/last", "GET"))
 
@@ -79,8 +81,33 @@ function getVehiculesInfo()
 }
 
 //permet de récupérer les informations d'un vehicule d'id
-function getVehiculeInfo(id)
-{
+function getVehiculeInfo(id) {
     //the id must be a string to avoid that 00000 becomes 0
     return callApi("vehicle/api/v1/vehicles/" + id, "GET");
+}
+
+//bike walk and subway
+function shortest_path(method, departure_x, departure_y, arrival_x, arrival_y) {
+    var endpoint= "graph/road_graph/shortest_path/".concat(method);
+    var body = {
+        "departure": {"x": departure_x, "y": departure_y},
+        "arrival": {"x": arrival_x, "y": arrival_y}
+    };
+    return callApi(endpoint, 'POST', JSON.stringify(body));
+
+}
+
+function shortest_path_car(departure_x, departure_y, arrival_x, arrival_y, vehicles) {
+    var endpoint= "graph/road_graph/shortest_path/car";
+    var body = {
+        "departure": {"x": departure_x, "y": departure_y},
+        "arrival": {"x": arrival_x, "y": arrival_y},
+        "vehicles": vehicles
+    };
+    return callApi(endpoint, 'POST', JSON.stringify(body));
+}
+
+function reset(method) {
+    var endpoint = "graph/api/road_graph/reset_graph/".concat(method);
+    return callApi(endpoint, 'POST');
 }
