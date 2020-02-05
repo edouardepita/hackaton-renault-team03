@@ -1,0 +1,151 @@
+.split {
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+  }
+  
+  .left {
+    left: 0;
+    background-color:#fcf8e3;
+    height:100vh;
+    overflow:hidden;
+  }
+  
+  .right {
+    right: 0;
+    background-color: #dbdbdb;
+  }
+  
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .centered img {
+    width: 150px;
+    border-radius: 50%;
+  }
+
+  .map-div>img{
+      max-height:300px;
+      padding-left:15px;
+  }
+
+  .mission-racine {
+    display: flex;
+    padding: 0 19px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+    box-sizing: border-box;
+    margin: 20px 40px 0px;
+    margin-bottom:80px;
+}
+
+  .mission-div {
+  max-width: 600px;
+  margin-right: 60px;
+  padding-top: 10px;
+}
+
+.loca-div {
+  margin-top: 10px;
+  width: 40%;
+}
+
+  .depart{
+      height:50px;
+  }
+
+  .arrive{
+      height:50px;
+  }
+
+  .mission-txt {
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 18px;
+}
+
+  .depart-txt,.arrive-txt{
+    font-family: "Montserrat";
+    font-weight: 600;
+    font-size: 18px;
+  }
+
+  .front{
+    background-color:#e4e0cc;
+  }
+
+  @media only screen and (min-width:980px){
+    body{
+      overflow:hidden;
+    }
+  }
+
+  .trajet-div{
+    margin-left:20px;
+  }
+
+  .trajet-1, .trajet-2, .trajet-3{
+    margin-bottom:40px;
+  }
+
+  .trajet-title{
+    font-weight:700;
+    font-size:20px;
+    line-height:4;
+  }
+
+  .event-div{
+    background-color:#fff;
+    margin-left:20px;
+    margin-right:20px;
+    margin-top:20px;
+    margin-bottom:20px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+    box-sizing: border-box;
+    padding:20px;
+    height: 54vh;
+  }
+
+  .event2-div{
+    background-color:lightgreen;
+    display:flex;
+  }
+
+  .pollution-div{
+    width:50%;
+    display: flex;
+  }
+
+  .meteo-div{
+    width:50%;
+  }
+
+  .event-title{
+    text-decoration: underline;
+    font-family: "Montserrat";
+    font-weight: 700;
+    font-size: 20px;
+  }
+
+  .pollution-pic{
+    max-height: 210px;
+  }
+  
+  .pollution-val-div,.pollution-pic-div{
+    display: flex;
+    align-items: center;
+  }
+
+  .my-btn{
+    font-family: "Montserrat"!important;
+    font-weight: 700!important;
+    font-size: 20px!important;
+  }

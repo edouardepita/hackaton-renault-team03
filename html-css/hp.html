@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang = "en-US">
+    <head>
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
+        <meta charset = "UTF-8">
+        <title>test</title>
+    </head>
+    <body>
+        
+            <div class="split right">
+                <div class="map-div">
+                    <img src="../image/map.png" alt="Map">
+                    <div class="event-div">
+                        <p class="event-title">Evenements</p>
+                        <p class="mission-txt">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <div class="event2-div">
+                            <div class="pollution-div">
+                                <div class="pollution-pic-div">
+                                    <img class="pollution-pic" src="../image/pollution-picto.png" alt="picto pullution">
+                                </div>
+                                <div class="pollution-val-div">
+                                    <i class="fa fa-car" style="font-size:60px;color:red;"></i>
+                                </div>
+                            </div>
+                            <div class="meteo-div">
+                                <img class="pollution-pic" src="../image/pollution-picto.png" alt="picto pullution">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="split left" id="card">
+                <div class="front">
+                    <div class="centered">
+                        <button class="my-btn btn">Découvrir la mission</button>
+                    </div>
+                </div>
+                <div class="back">
+                    <div class="mission-racine">
+                        <div class="mission-div">
+                            <p class="mission-txt">Votre mission, si vous l'acceptez, consiste à aller à cet endroit le plus rapidement possible.</p>
+                        </div>
+                        <div class="loca-div">
+                            <div class="depart">
+                                <p class="depart-txt">Départ : </p>
+                         </div>
+                         <div class="arrive">
+                                <p class="arrive-txt">Arrivée : </p>
+                         </div>
+                     </div>
+                 </div>
+                    <ul class="trajet-div">
+                        <li class="trajet-1"><span class="trajet-title"> Trajet 1<br /></span>10min de train, 20min à pied, 10min de vélo</li>
+                        <li class="trajet-2"><span class="trajet-title"> Trajet 2<br /></span>10min de train, 20min à pied, 10min de vélo</li>
+                        <li class="trajet-3"><span class="trajet-title"> Trajet 3<br /></span>10min de train, 20min à pied, 10min de vélo</li>
+                    </ul>
+                </div>
+             </div>
+    </body>>
+</html>
+
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script>
+jQuery(function(){
+    jQuery("#card").flip({trigger: 'manual'});
+});
+
+jQuery(".btn").click(function(){
+    jQuery("#card").flip('toggle');
+});
+</script>
