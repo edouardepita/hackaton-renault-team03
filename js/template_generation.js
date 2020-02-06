@@ -138,17 +138,26 @@ function FaddPath(listOfPath)
 {
     var pathList = [];
 
+    
     for (let i = 0; i < listOfPath.length; i++) {
-        const stepList = listOfPath[i];
+        const stepList = JSON.parse(listOfPath[i])["cars"];
+        
+        console.log("stepList -----");
+        console.log(stepList);
         
         var vehicleType = [];
         var lengthList = [];    
 
         for (let j = 0; j < stepList.length;j++) {
-            const step = stepList[j];
             
-            vehicleType.push(step[id]);
-            lengthList.push(step[i]);
+            const step = stepList[j];
+
+            console.log("step ----")
+            console.log(step);
+
+            
+            vehicleType.push(step["id"]);
+            lengthList.push(step["path_length"]);
         }
 
         var route = {

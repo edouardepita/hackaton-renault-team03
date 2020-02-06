@@ -101,13 +101,10 @@ client.on('message', function (topic, message, packet) {
         const mission = payload.mission;
         FmissionUpdate(mission);
         checkpoints = payload.positions;
-        console.log(checkpoints);
+        console.log("get_all_paths(checkpoints) -----")
+        console.log(get_all_paths(checkpoints));
         var slog = allPossibleCases(get_all_paths(checkpoints));
         FaddPath(slog);
-        console.log("iofbyvfye")
-        console.log(slog);
-  //      console.log(mission, checkpoints);
-        get_all_paths(checkpoints);
         break;
       case '/prod/user/situation':
         const vehicle_type = payload.vehicle_type;

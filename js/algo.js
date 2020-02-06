@@ -1,4 +1,6 @@
 
+ENVIRONMENT = "team03";
+
 var baseURL = "http://" + ENVIRONMENT + ".xp65.renault-digital.com/api/"
 
 function Request(url, method, body = null)
@@ -101,6 +103,7 @@ function shortest_path(method, departure_x, departure_y, arrival_x, arrival_y) {
         "departure": {"x": departure_x, "y": departure_y},
         "arrival": {"x": arrival_x, "y": arrival_y}
     };
+    
     return callApi(endpoint, 'POST', JSON.stringify(body));
 
 }
@@ -130,10 +133,12 @@ function get_all_paths(positions) {
     {
         var xi = positions[i]["x"];
         var yi = positions[i]["y"];
+
         var list = new Array();
         //list = list.concat(list, shortest_path_car(x,y,xi, yi))
         //list =  verify_position(list, shortest_path('subway', x,y, xi,yi), xi,yi)
         list = list.concat(shortest_path('subway', x,y, xi,yi))
+        
         if (JSON.parse(getCurrentWeather())['condition'] === 'normal') {
             list =list.concat(shortest_path('walk',x,y,xi, yi));
             if (JSON.parse(getCurrentAirQuality())['condition'] === 'normal') {
