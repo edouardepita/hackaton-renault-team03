@@ -24,19 +24,19 @@ var options = {
 var client = mqtt.connect(broker, options);
 
 function move_agent(vehicle_type, target){
-  publish(ENVIRONMENT + '/prod/user/path', {vehicle_type: vehicle_type, target: target});
+  publish('/prod/user/path', {vehicle_type: vehicle_type, target: target});
 }
 
 function stop_agent(){
-  publish(ENVIRONMENT +  '/prod/user/stop');
+  publish('/prod/user/stop');
 }
 
 function reset(){
-  publish(ENVIRONMENT +  '/prod/city/reset');
+  publish('/prod/city/reset');
 }
 
 function teleport_agent(vehicle_type, path, costs){
-  publish(ENVIRONMENT + '/prod/user/path-to-target', {vehicle_type: vehicle_type, path: path, costs: costs})
+  publish('/prod/user/path-to-target', {vehicle_type: vehicle_type, path: path, costs: costs})
 }
 
 
