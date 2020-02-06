@@ -130,7 +130,7 @@ function get_all_paths(positions) {
         }
         x = xi;
         y = yi;
-        paths = paths.concat(list)
+        paths = paths.concat(new Array(list))
     }
     return paths;
 }
@@ -159,10 +159,10 @@ function allPossibleCases(list){
         var rest = allPossibleCases(list.slice(1));
         for (var c in rest) {
             for(var i = 0; i < list[0].length; i++){
-                result.push(rest[c].unshift(list[0][i]));
+                result.push([list[0][i]].concat(rest[c]));
             }
         }
-        return list;
+        return result;
     }
 }
 
