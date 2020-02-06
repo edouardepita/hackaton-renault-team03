@@ -1,7 +1,5 @@
 
-var env = "team03";
-
-var baseURL = "http://" + env + ".xp65.renault-digital.com/api/"
+var baseURL = "http://" + ENVIRONMENT + ".xp65.renault-digital.com/api/"
 
 function Request(url, method, body = null)
 {
@@ -28,8 +26,6 @@ function callApi(endpoint, method, body = null)
     return Request(url, method, body);
 }
 
-
-//console.log("TEST CALL API AGENT SITUATION : " + callApi("agent/api/user/situation/last", "GET"))
 
 //récupère la dernière situation connue de l'agent.
 function getAgentSituation()
