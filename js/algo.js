@@ -170,7 +170,7 @@ function allPossibleCases(list){
     }
 }
 
-function DrawPath(start, end)
+function DrawPath(Jarray = [])
 {
     var c = document.getElementById("Map"); 
     var wf = c.width / 22;
@@ -178,11 +178,28 @@ function DrawPath(start, end)
     var ctx = c.getContext("2d");
     ctx.beginPath();
 
-    ctx.moveTo(9.2 * wf, (5.8 - 2.1) * hf);
-    ctx.lineTo(8.6 * wf, (5.8 - 3.8) * hf);
-    ctx.lineTo(11.9 * wf, (5.8 - 5.6) * hf);
-    ctx.lineTo(15.8 * wf, (5.8 - 3.8) * hf);
-    ctx.lineTo(20.9 * wf, (5.8 - 5.6) * hf);
+    for (let index = 0; index < Jarray.length; index++) {
+        const element = Jarray[index];
+        const paths = element["cars"][0]["paths"];
+
+        ctx.moveTo(paths[0][0] * wf, (5.9 - paths[0][1]) * hf);
+        for (let j = 1; j < paths.length; j++) {
+            const pos = paths[j];
+            ctx.lineTo(pos[0] * wf, (5.9- pos[1]) * hf);
+        }
+    }
+
+    //[[9.2, 2.1], [9.2, 2.0], [11.0, 2.0], [11.9, 2.0], [12.8, 2.0], [14.6, 2.0], [16.4,2.0], [16.4, 3.8], [18.2, 3.8], [20.0, 3.8]]
+    // ctx.moveTo(9.2 * wf, (5.9 - 2.1) * hf);
+    // ctx.lineTo(9.2 * wf, (5.9- 2) * hf);
+    // ctx.lineTo(11 * wf, (5.9- 2) * hf);
+    // ctx.lineTo(11.9 * wf, (5.9- 2) * hf);
+    // ctx.lineTo(12.8 * wf, (5.9- 2) * hf);
+    // ctx.lineTo(14.6 * wf, (5.9 - 2) * hf);
+    // ctx.lineTo(16.4 * wf, (5.9 - 2) * hf);
+    // ctx.lineTo(16.4 * wf, (5.9 - 3.8) * hf);
+    // ctx.lineTo(18.2 * wf, (5.9 - 3.8) * hf);
+    // ctx.lineTo(20 * wf, (5.9 - 3.8) * hf);
 
     ctx.strokeStyle = "#FF0000";
     ctx.stroke();
