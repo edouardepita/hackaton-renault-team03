@@ -69,16 +69,16 @@ xmlHttp.send( null );
 robotaxi_id = JSON.parse(xmlHttp.responseText)[0].id;
 console.log(robotaxi_id);
 
-subscribe('/prod/user/situation​')
-subscribe('/prod/user/mission​')
+subscribe('/prod/user/situation')
+subscribe('/prod/user/mission')
 subscribe('/prod/user/objective-reached')
 subscribe('/prod/user/status')
-subscribe('/prod/context/change/weather​')
-subscribe('/prod/context/change/air​')
-subscribe('/prod/environment/change/roads_status​​')
-subscribe('/prod/environment/change/lines_state​​')
-subscribe('/prod/environment/change/traffic_conditions​')
-subscribe('/prod/environment/change/breakdown​')
+subscribe('/prod/context/change/weather')
+subscribe('/prod/context/change/air')
+subscribe('/prod/environment/change/roads_status')
+subscribe('/prod/environment/change/lines_state')
+subscribe('/prod/environment/change/traffic_conditions')
+subscribe('/prod/environment/change/breakdown')
 subscribe('/prod/city/reset')
 subscribe('/prod/user/path-to-target')
 
@@ -107,7 +107,7 @@ client.on('message', function (topic, message, packet) {
     }
     switch (short_topic)
     {
-      case '/prod/user/mission':
+        case '/prod/user/mission':
         const mission = payload.mission;
         checkpoints = payload.positions;
         get_all_paths(checkpoints);
