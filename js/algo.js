@@ -167,4 +167,18 @@ function allPossibleCases(list){
     }
 }
 
-
+function DrawPath(start, end)
+{
+    var c = document.getElementById("Map"); 
+    var wf = c.width / 22;
+    var hf = c.height / 6;
+    var ctx = c.getContext("2d");
+    ctx.beginPath();
+    ctx.moveTo(0.2 * wf, 0.2 * hf + 4);
+    ctx.lineTo(0.2 * wf, hf * 2.2);
+    ctx.lineTo(9.2 * wf, hf * 2.2);
+    ctx.lineTo(9.2 * wf, hf * 4);
+    ctx.lineTo(20 * wf, hf * 4);
+    ctx.strokeStyle = "#FF0000";
+    ctx.stroke();
+}

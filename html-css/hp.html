@@ -16,9 +16,12 @@
 <body>
     <div class="split right">
         <div class="map-div">
-            <img src="../image/map.png" alt="Map">
+            <!-- <img src="../image/map.png" alt="Map"> -->
+            <div class="mapContainer">
+                <canvas class="map" id="Map"></canvas>
+            </div>
             <div class="card" style="margin: 20px; min-height: 50vh;">
-                <h5 class="card-header">
+                <h5 class="card-header" style="color: #220c8d;">
                     <i class="fa fa-info-circle"></i>
                     Information
                 </h5>
@@ -30,8 +33,8 @@
                             Méteo
                         </h5>
 
-                        <h4 class="card-title text-primary" id="weatherElement">
-                            <i class="fa fa-spinner fa-spin"></i>
+                        <h4 class="card-title text-primary">
+                            <i class="fa fa-spinner fa-spin" id="weatherElement"></i>
                         </h4>
 
                     </div>
@@ -44,8 +47,8 @@
                             <i class="fa fa-industry"></i>
                             Pollution
                         </h5>
-                        <h4 class="card-title text-primary" id="pollutionElement">
-                            <i class="fa fa-spinner fa-spin"></i>
+                        <h4 class="card-title text-primary" >
+                            <i class="fa fa-spinner fa-spin" id="pollutionElement"></i>
                         </h4>
                     </div>
                     <hr>
@@ -162,5 +165,21 @@
         $(this).addClass("animated fadeOut");
         $("#left-part").removeClass("hide");
         $("#left-part").addClass("animated fadeInLeft");
+
+        //Remove the spinner
+        $("#weatherElement").removeClass("fa fa-spinner fa-spin");
+        $("#pollutionElement").removeClass("fa fa-spinner fa-spin");
+
+        //Get the current weather and the air quality and setting up the dictionnary
+        var weather = JSON.parse(getCurrentWeather())["condition"];
+        var weatherdico = {"normal" : "fas fa-cloud-sun", "heat wave" : "fas fa-sun orange", "snow" : "far fa-snowflake", "rain": "fas fa-cloud-showers-heavy"};
+        var pollution = JSON.parse(getCurrentAirQuality())["condition"];
+        var pollutiondico = {"normal": "fas fa-check-circle green", "pollution peak" : "fas fa-exclamation-triangle orange"};
+
+        //Change the icons depending on the weather and pollution
+        $("#weatherElement").addClass(weatherdico[weather]);
+        $("#pollutionElement").addClass(pollutiondico[pollution]);
+
+        DrawPath();
     });
 </script>

@@ -176,3 +176,25 @@
   .pollution-val-div{
     text-align:center;
   }
+
+  .green{
+    color : #28a745!important;
+  }
+
+  .orange{
+    color : orange
+  }
+
+  .map{
+    background-image: url(../image/map.png); 
+    background-size: 725px 300px;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+  }
+
+  .mapContainer{
+    width: 725px; 
+    height: 300px;
+    margin-left: 20px;
+  }
