@@ -9,16 +9,25 @@
   
   .left {
     left: 0;
-    background-color:#fcf8e3;
     height:100vh;
-    overflow:hidden;
   }
   
   .right {
     right: 0;
-    background-color: #dbdbdb;
+    overflow: hidden;
   }
-  
+
+ 
+  .card {
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+
+  .cardover:hover{
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(33,33,33,.2);
+  }
+
   .centered {
     position: absolute;
     top: 50%;
@@ -40,11 +49,15 @@
   .mission-racine {
     display: flex;
     padding: 0 19px;
-    background-color: #fff;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
     box-sizing: border-box;
     margin: 20px 40px 0px;
     margin-bottom:80px;
+
+}
+
+.hide {
+  visibility: hidden;
 }
 
   .mission-div {
@@ -78,9 +91,6 @@
     font-size: 18px;
   }
 
-  .front{
-    background-color:#e4e0cc;
-  }
 
   @media only screen and (min-width:980px){
     body{
@@ -116,7 +126,6 @@
   }
 
   .event2-div{
-    background-color:lightgreen;
     display:flex;
   }
 

@@ -129,6 +129,7 @@ client.on('message', function (topic, message, packet) {
       case '/context/change/weather':
         const condition = payload.condition;
         warning = "La météo a été mise à jour, changement d'itinéraire."
+        $("#coucou").addClass("animated fadeOut");
         break;
       case '/context/change/air':
         const condition2 = payload.condition;

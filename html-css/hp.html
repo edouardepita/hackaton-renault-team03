@@ -1,115 +1,166 @@
 <!DOCTYPE html>
-<html lang = "en-US">
-    <head>
-        <link rel="stylesheet" type="text/css" href="stylesheet.css">
-        <meta charset = "UTF-8">
-        <title>test</title>
-    </head>
-    <body>
-        
-            <div class="split right">
-                <div class="map-div">
-                    <div style="width: 800px;">
-                        <canvas id="map" style="background-image: url(../image/map.png); width: 100%; background-repeat: no-repeat; background-size: 700px 400px"></canvas>
+<html lang="en-US">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    </link>
+
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+
+<body>
+    <div class="split right">
+        <div class="map-div">
+            <img src="../image/map.png" alt="Map">
+            <div class="card" style="margin: 20px; min-height: 50vh;">
+                <h5 class="card-header">
+                    <i class="fa fa-info-circle"></i>
+                    Information
+                </h5>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between" id="weather">
+
+                        <h5>
+                            <i class="fa fa-cloud"></i>
+                            Méteo
+                        </h5>
+
+                        <h4 class="card-title text-primary" id="weatherElement">
+                            <i class="fa fa-spinner fa-spin"></i>
+                        </h4>
+
                     </div>
-                    <div class="event-div">
-                        <p class="event-title">Evenements</p>
-                        <p class="mission-txt">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <div class="event2-div">
-                            <div class="pollution-div">
-                                <div class="pollution-pic-div">
-                                    <p class="pollution-txt">Niveau de pollution</p>
-                                </div>
-                                <div class="pollution-val-div">
-                                    <i class="Pollution"></i>
-                                </div>
-                            </div>
-                            <div class="pollution-div">
-                                <div class="pollution-pic-div">
-                                    <p class="pollution-txt">Météo</p>
-                                </div>
-                                <div class="pollution-val-div">
-                                    <i class="Weather"></i>
-                                </div>
-                            </div>
-                        </div>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between" id="pollution">
+
+                        <h5>
+                            <i class="fa fa-industry"></i>
+                            Pollution
+                        </h5>
+                        <h4 class="card-title text-primary" id="pollutionElement">
+                            <i class="fa fa-spinner fa-spin"></i>
+                        </h4>
                     </div>
+                    <hr>
+
+                    <div class="d-flex justify-content-between">
+                        <h5>
+                            <i class="fa fa-subway"></i>
+                            Stations de metro
+                        </h5>
+                        <h4 class="card-title text-success">
+                            <i class="fa fa-check-circle fa-lg"></i>
+                        </h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="split left" id="card">
+        <button type="button" id="startMission" class="btn btn-primary centered">
+            Démarrer
+        </button>
+        <div class="back hide" id="left-part">
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-header">
+                    <i class="fa fa-star" style="color:yellow"></i>
+                    Mission
+                </div>
+                <div class="card-body">
+                    <p class="card-text" id="mission">
+                        Aller à l'aéroport!!
+                    </p>
+                </div>
+            </div>
+            <hr style="padding-left: 5px;">
+            
+            
+            
+            <div class="card cardover">
+                <div class="card-body" data-toggle="collapse" data-target="#demo">
+                    This is some text within a card body.
                 </div>
 
+                <div class="collapse" id="demo" style="margin-left: 20px; margin-right: 20px;">
+                    <button class="btn btn-outline-success btn-block" style="margin-bottom: 5px;">
+                        <i class="fas fa-walking"></i>
+                        23 maeoo Time
+                    </button>
+                    <button class="btn btn-outline-primary btn-block">
+                        <i class="fas fa-bicycle"></i>
+                        23 maeoo Time
+                    </button>
+                    <button class="btn btn-outline-warning btn-block">
+                        <i class="fas fa-train"></i>
+                        23 maeoo Time
+                    </button>
+                    <button class="btn btn-outline-danger btn-block">
+                        <i class="fas fa-car-side"></i>
+                        23 maeoo Time
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="card cardover">
+                <div class="card-body">
+                    This is some text within a card body.
+                </div>
+            </div>
+            <div class="card cardover">
+                <div class="card-body">
+                    This is some text within a card body.
+                </div>
+            </div>
+            <div class="card cardover">
+                <div class="card-body">
+                    This is some text within a card body.
+                </div>
 
             </div>
-            <div class="split left" id="card">
-                <div class="front">
-                    <div class="centered">
-                        <button class="my-btn btn">Découvrir la mission</button>
-                    </div>
-                </div>
-                <div class="back">
-                    <div class="mission-racine">
-                        <div class="mission-div">
-                            <p class="mission-txt">Votre mission, si vous l'acceptez, consiste à aller à cet endroit le plus rapidement possible.</p>
-                        </div>
-                        <div class="loca-div">
-                            <div class="depart">
-                                <p class="depart-txt">Départ : </p>
-                         </div>
-                         <div class="arrive">
-                                <p class="arrive-txt">Arrivée : </p>
-                         </div>
-                     </div>
-                 </div>
-                    <ul class="trajet-div">
-                        <li class="trajet-1"><span class="trajet-title"> Trajet 1<br /></span>10min de train, 20min à pied, 10min de vélo</li>
-                        <li class="trajet-2"><span class="trajet-title"> Trajet 2<br /></span>10min de train, 20min à pied, 10min de vélo</li>
-                        <li class="trajet-3"><span class="trajet-title"> Trajet 3<br /></span>10min de train, 20min à pied, 10min de vélo</li>
-                    </ul>
-                </div>
-             </div>
-    </body>>
+
+
+        </div>
+    </div>
+</body>
+
 </html>
 
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!--Used by bootstrap-->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+
 <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css">
 
 <script src="../js/algo.js"></script>
+<script src="../js/environement.js"></script>
+<script src="https://unpkg.com/mqtt@2.12.0/dist/mqtt.min.js"></script>
+<script src="../js/library/mqtt_controler/mqtt_controler.js"></script>
+<script src="../js/template_generation.js"></script>
+
 <script>
-    jQuery(function(){
-        jQuery("#card").flip({trigger: 'manual'});
+
+    $("#startMission").click(function () {
+        $(this).addClass("animated fadeOut");
+        $("#left-part").removeClass("hide");
+        $("#left-part").addClass("animated fadeInLeft");
     });
-
-    jQuery(".btn").click(function(){
-        jQuery("#card").flip('toggle');
-    });
-
-
-    var weather = JSON.parse(getCurrentWeather())["condition"];
-    if (weather === "snow")
-        $(".Weather").addClass("fas fa-snowflake");
-    if (weather === "rain")
-        $(".Weather").addClass("fas fa-cloud-showers-heavy");
-    if (weather === "normal")
-        $(".Weather").addClass("fas fa-cloud-sun");
-    if (weather === "heat wave")
-        $(".Weather").addClass("fa fa-sun my-fa-sun");
-
-    var pollution = JSON.parse(getCurrentAirQuality());
-    if (pollution === "normal")
-        $(".Pollution").addClass("");
-    if (pollution === "")
-        $(".Pollution").addClass("");
-
-
-    
-    var c = document.getElementById("map");
-    var ctx = c.getContext("2d");
-    ctx.beginPath();
-    ctx.strokeStyle = "#FF0000";
-    ctx.moveTo(10, 55);
-    ctx.lineTo(150, 55);
-    ctx.stroke();
-
 </script>
