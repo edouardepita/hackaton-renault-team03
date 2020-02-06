@@ -47,7 +47,7 @@
                             <i class="fa fa-industry"></i>
                             Pollution
                         </h5>
-                        <h4 class="card-title text-primary" >
+                        <h4 class="card-title text-primary">
                             <i class="fa fa-spinner fa-spin" id="pollutionElement"></i>
                         </h4>
                     </div>
@@ -85,55 +85,12 @@
                 </div>
             </div>
             <hr style="padding-left: 5px;">
-            
-            
-            
-            <div class="card cardover">
-                <div class="card-body" data-toggle="collapse" data-target="#demo">
-                    This is some text within a card body.
-                </div>
 
-                <div class="collapse" id="demo" style="margin-left: 20px; margin-right: 20px;">
-                    <button class="btn btn-outline-success btn-block" style="margin-bottom: 5px;">
-                        <i class="fas fa-walking"></i>
-                        23 maeoo Time
-                    </button>
-                    <button class="btn btn-outline-primary btn-block">
-                        <i class="fas fa-bicycle"></i>
-                        23 maeoo Time
-                    </button>
-                    <button class="btn btn-outline-warning btn-block">
-                        <i class="fas fa-train"></i>
-                        23 maeoo Time
-                    </button>
-                    <button class="btn btn-outline-danger btn-block">
-                        <i class="fas fa-car-side"></i>
-                        23 maeoo Time
-                    </button>
-                </div>
-            </div>
+            <div id="pathContainer">
 
-
-            <div class="card cardover">
-                <div class="card-body">
-                    This is some text within a card body.
-                </div>
-            </div>
-            <div class="card cardover">
-                <div class="card-body">
-                    This is some text within a card body.
-                </div>
-            </div>
-            <div class="card cardover">
-                <div class="card-body">
-                    This is some text within a card body.
-                </div>
 
             </div>
-
-
         </div>
-    </div>
 </body>
 
 </html>
@@ -166,19 +123,13 @@
         $("#left-part").removeClass("hide");
         $("#left-part").addClass("animated fadeInLeft");
 
-        //Remove the spinner
-        $("#weatherElement").removeClass("fa fa-spinner fa-spin");
-        $("#pollutionElement").removeClass("fa fa-spinner fa-spin");
-
         //Get the current weather and the air quality and setting up the dictionnary
         var weather = JSON.parse(getCurrentWeather())["condition"];
-        var weatherdico = {"normal" : "fas fa-cloud-sun", "heat wave" : "fas fa-sun orange", "snow" : "far fa-snowflake", "rain": "fas fa-cloud-showers-heavy"};
         var pollution = JSON.parse(getCurrentAirQuality())["condition"];
-        var pollutiondico = {"normal": "fas fa-check-circle green", "pollution peak" : "fas fa-exclamation-triangle orange"};
 
-        //Change the icons depending on the weather and pollution
-        $("#weatherElement").addClass(weatherdico[weather]);
-        $("#pollutionElement").addClass(pollutiondico[pollution]);
+
+        FweatherUpdate(weather);
+        FpollutionUpdate(pollution);
 
         var json = [{"cars": [{"id": "walk", "paths": [[9.2, 2.1], [9.2, 2.0], [11.0, 2.0], [11.9, 2.0], [12.8, 2.0], [14.6, 2.0], [16.4,
 2.0], [16.4, 3.8], [18.2, 3.8], [20.0, 3.8]], "costs": [0.0, 0.10000000000000009, 12.600000000000005,
