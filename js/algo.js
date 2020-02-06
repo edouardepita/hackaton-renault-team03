@@ -174,11 +174,13 @@ function DrawPath(start, end)
     var hf = c.height / 6;
     var ctx = c.getContext("2d");
     ctx.beginPath();
-    ctx.moveTo(0.2 * wf, 0.2 * hf + 4);
-    ctx.lineTo(0.2 * wf, hf * 2.2);
-    ctx.lineTo(9.2 * wf, hf * 2.2);
-    ctx.lineTo(9.2 * wf, hf * 4);
-    ctx.lineTo(20 * wf, hf * 4);
+
+    ctx.moveTo(9.2 * wf, (5.8 - 2.1) * hf);
+    ctx.lineTo(8.6 * wf, (5.8 - 3.8) * hf);
+    ctx.lineTo(11.9 * wf, (5.8 - 5.6) * hf);
+    ctx.lineTo(15.8 * wf, (5.8 - 3.8) * hf);
+    ctx.lineTo(20.9 * wf, (5.8 - 5.6) * hf);
+
     ctx.strokeStyle = "#FF0000";
     ctx.stroke();
 }
