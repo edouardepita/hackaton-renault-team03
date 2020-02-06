@@ -67,7 +67,7 @@ var xmlHttp = new XMLHttpRequest();
 xmlHttp.open( "GET", "http://" + ENVIRONMENT + ".xp65.renault-digital.com/api/vehicle/api/v1/vehicles", false ); // false for synchronous request
 xmlHttp.send( null );
 robotaxi_id = JSON.parse(xmlHttp.responseText)[0].id;
-console.log(robotaxi_id);
+// console.log(robotaxi_id);
 
 subscribe('/prod/user/situation')
 subscribe('/prod/user/mission')
@@ -81,16 +81,6 @@ subscribe('/prod/environment/change/traffic_conditions')
 subscribe('/prod/environment/change/breakdown')
 subscribe('/prod/city/reset')
 subscribe('/prod/user/path-to-target')
-
-client.publish('team03/prod/city/reset', '', { qos: 0, retain: false })
-publish('/prod/user/path-to-target', {
-    "vehicle_type": "walk",
-    "path": [
-        [21, 5.6],
-        [20.9, 5.6]
-    ],
-    "costs": [0.0, 0.0]
-})
 
 //client.publish('team03/myteam/test', 'wss secure connection demo...!', { qos: 0, retain: false })
 
@@ -110,46 +100,62 @@ client.on('message', function (topic, message, packet) {
         case '/prod/user/mission':
         const mission = payload.mission;
         checkpoints = payload.positions;
+  //      console.log(mission, checkpoints);
         get_all_paths(checkpoints);
         break;
       case '/prod/user/situation':
         const vehicle_type = payload.vehicle_type;
         const position = payload.position;
-        const total_cost = payload.total_cost;
+        var total_cost = payload.total_cost;
+        if (total_cost == undefined) {
+          total_cost = 0;
+        }
+//        console.log(vehicle_type, position, total_cost);
         break;
-      case '/user/objective-reached':
+      case '/prod/user/objective-reached':
         checkpoints.shift();
+//        console.log(checkpoints);
         break;
-      case '/user/status':
+      case '/prod/user/status':
         const status = payload.status;
         const vehicle_type2 = payload.situation.vehicle_type;
         const position2 = payload.situation.position;
-        const total_cost2 = payload.situation.total_cost;
+        var total_cost2 = payload.situation.total_cost;
+        if (total_cost2 == undefined) {
+          total_cost2 = 0;
+        }
+//        console.log(status, vehicle_type2, position2, total_cost2);
         break;
-      case '/context/change/weather':
+      case '/prod/context/change/weather':
         const condition = payload.condition;
         warning = "La météo a été mise à jour, changement d'itinéraire."
+//        console.log(condition, warning);
         $("#coucou").addClass("animated fadeOut");
         break;
-      case '/context/change/air':
+      case '/prod/context/change/air':
         const condition2 = payload.condition;
         warning = "La qualité de l'air a été mise à jour, changement d'itinéraire."
+//        console.log(condition2, warning);
         break;
-      case '/environment/change/roads_status':
+      case '/prod/environment/change/roads_status':
         warning = "Un ou plusieurs incident(s) de la ville ont été détecté(s), changement d'itinéraire. (fermeture/ouverture de voies de circulation)";
         const roads_changes = payload;
+//        console.log(warning, payload);
         break;
-      case '/environment/change/lines_state':
+      case '/prod/environment/change/lines_state':
         warning = "Un ou plusieurs incident(s) de la ville ont été détecté(s), changement d'itinéraire. (fermeture/ouverture de ligne de métro)";
         const subway_changes = payload;
+//        console.log(warning, subway_changes);
         break;
-      case '/environment/change/traffic_conditions':
+      case '/prod/environment/change/traffic_conditions':
         warning = "Un ou plusieurs incident(s) de la ville ont été détecté(s), changement d'itinéraire. (ralentissements sur les voies de ciculation)";
         const traffic_changes = payload;
+//        console.log(warning, traffic_changes);
         break;
       case '/prod/environment/change/breakdown':
         warning = "Un ou plusieurs incident(s) de la ville ont été détecté(s), changement d'itinéraire. (panne de robotaxi)";
         const vehicle = payload.vehicle;
+//        console.log(warning, vehicle);
         break;
       case '/prod/' + robotaxi_id + '/status/attitude':
         break;

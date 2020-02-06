@@ -1,7 +1,5 @@
 
-var env = "team03";
-
-var baseURL = "http://" + env + ".xp65.renault-digital.com/api/"
+var baseURL = "http://" + ENVIRONMENT + ".xp65.renault-digital.com/api/"
 
 function Request(url, method, body = null)
 {
@@ -28,8 +26,6 @@ function callApi(endpoint, method, body = null)
     return Request(url, method, body);
 }
 
-
-//console.log("TEST CALL API AGENT SITUATION : " + callApi("agent/api/user/situation/last", "GET"))
 
 //récupère la dernière situation connue de l'agent.
 function getAgentSituation()
@@ -146,7 +142,7 @@ function get_all_paths(positions) {
         }
         x = xi;
         y = yi;
-        paths = paths.concat(list)
+        paths = paths.concat(new Array(list))
     }
     return paths;
 }
@@ -175,25 +171,44 @@ function allPossibleCases(list){
         var rest = allPossibleCases(list.slice(1));
         for (var c in rest) {
             for(var i = 0; i < list[0].length; i++){
-                result.push(rest[c].unshift(list[0][i]));
+                result.push([list[0][i]].concat(rest[c]));
             }
         }
-        return list;
+        return result;
     }
 }
 
-function DrawPath(start, end)
+function DrawPath(Jarray = [])
 {
     var c = document.getElementById("Map"); 
     var wf = c.width / 22;
     var hf = c.height / 6;
     var ctx = c.getContext("2d");
     ctx.beginPath();
-    ctx.moveTo(0.2 * wf, 0.2 * hf + 4);
-    ctx.lineTo(0.2 * wf, hf * 2.2);
-    ctx.lineTo(9.2 * wf, hf * 2.2);
-    ctx.lineTo(9.2 * wf, hf * 4);
-    ctx.lineTo(20 * wf, hf * 4);
+
+    for (let index = 0; index < Jarray.length; index++) {
+        const element = Jarray[index];
+        const paths = element["cars"][0]["paths"];
+
+        ctx.moveTo(paths[0][0] * wf, (5.9 - paths[0][1]) * hf);
+        for (let j = 1; j < paths.length; j++) {
+            const pos = paths[j];
+            ctx.lineTo(pos[0] * wf, (5.9- pos[1]) * hf);
+        }
+    }
+
+    //[[9.2, 2.1], [9.2, 2.0], [11.0, 2.0], [11.9, 2.0], [12.8, 2.0], [14.6, 2.0], [16.4,2.0], [16.4, 3.8], [18.2, 3.8], [20.0, 3.8]]
+    // ctx.moveTo(9.2 * wf, (5.9 - 2.1) * hf);
+    // ctx.lineTo(9.2 * wf, (5.9- 2) * hf);
+    // ctx.lineTo(11 * wf, (5.9- 2) * hf);
+    // ctx.lineTo(11.9 * wf, (5.9- 2) * hf);
+    // ctx.lineTo(12.8 * wf, (5.9- 2) * hf);
+    // ctx.lineTo(14.6 * wf, (5.9 - 2) * hf);
+    // ctx.lineTo(16.4 * wf, (5.9 - 2) * hf);
+    // ctx.lineTo(16.4 * wf, (5.9 - 3.8) * hf);
+    // ctx.lineTo(18.2 * wf, (5.9 - 3.8) * hf);
+    // ctx.lineTo(20 * wf, (5.9 - 3.8) * hf);
+
     ctx.strokeStyle = "#FF0000";
     ctx.stroke();
 }

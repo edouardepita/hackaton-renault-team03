@@ -26,7 +26,7 @@ function FweatherUpdate(weather)
         $("#weather").append(html);
     }
 
-    if (weather === "sun")
+    if (weather === "normal")
     {
         $("#weatherElement").remove();
         var html = [
@@ -82,7 +82,81 @@ function FmissionUpdate(mission)
     $("#mission").html(mission);
 }
 
-function addPath()
+
+
+function FpathUpdate(pathList)
 {
-    
+    const vehiclesMapping = {
+        "walk": '<i class="fas fa-walking"></i>',
+        "subway": '<i class="fas fa-train"></i>',
+        "car": '<i class="fas fa-car-side"></i>',
+        "bike": '<i class="fas fa-bicycle"></i>'
+    }
+
+    for (let index = 0; index < pathList.length; index++) {
+
+        var route = pathList[index];
+
+        var card = [
+            '<div class="card cardover animated fadeInLeft">',
+                '<div class="card-body" data-toggle="collapse" data-target="#demo' + index + '">',
+            'Proposition ' + (index + 1),
+            '</div>',
+            '<div class="collapse" id="demo' + index + '" style="margin-left: 20px; margin-right: 20px;">',
+                '<ul>'
+        ].join("\n");
+
+        for (let j = 0; j < route["vehicles"].length; j++) {
+
+            var cardDetails = [
+                        '<li>',
+                            vehiclesMapping[route["vehicles"][j]],
+                            route["length"][j] + ' Meaoo Time',
+                        '</li>',
+            ].join("\n");
+
+            card += cardDetails;       
+        }
+
+        cardEnd = [
+            '</ul>',
+            '<button class="btn btn-outline-primary btn-block" style="margin-bottom: 5px;">',
+            'Go!',
+            '</button>',
+            '</div>',
+            '</div>'
+        ].join("\n");
+
+        card += cardEnd
+
+        $("#pathContainer").append(card);
+    }
+}
+
+
+function addPath(listOfPath)
+{
+    var pathList = [];
+
+    for (let i = 0; i < listOfPath.length; i++) {
+        const stepList = listOfPath[i];
+        
+        var vehicleType = [];
+        var lengthList = [];    
+
+        for (let j = 0; j < stepList.length;j++) {
+            const step = stepList[j];
+            
+            vehicleType.push(step[id]);
+            lengthList.push(step[i]);
+        }
+
+        var route = {
+            "vehicles": vehicleType,
+            "length": lengthList
+        }
+        pathList.push(route);
+    }
+
+    FpathUpdate(pathList);
 }
