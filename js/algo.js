@@ -97,14 +97,14 @@ function shortest_path(method, departure_x, departure_y, arrival_x, arrival_y) {
 
 }
 
-function shortest_path_car(departure_x, departure_y, arrival_x, arrival_y, vehicles) {
+function shortest_path_car(departure_x, departure_y, arrival_x, arrival_y) {
     var endpoint= "graph/road_graph/shortest_path/car";
     var body = {
-        "departure": {"x": departure_x, "y": departure_y},
-        "arrival": {"x": arrival_x, "y": arrival_y},
-        "vehicles": vehicles
-    };
-    return callApi(endpoint, 'POST', JSON.stringify(body));
+ "departure": {"x": departure_x, "y": departure_y},
+"arrival": {"x": arrival_x, "y": arrival_y},
+"vehicles": JSON.parse(getVehiculesInfo())
+};
+return callApi(endpoint, 'POST', JSON.stringify(body));
 }
 
 function reset(method) {
@@ -123,27 +123,30 @@ function get_all_paths(positions) {
         var xi = positions[i]["x"];
         var yi = positions[i]["y"];
         var list = new Array();
-        list = verify_position(list, shortest_path_car(x,y,xi, yi), xi,yi)
-        list =  verify_position(list, shortest_path('subway', x,y, xi,yi), xi,yi)
+        //list = list.concat(list, shortest_path_car(x,y,xi, yi))
+        //list =  verify_position(list, shortest_path('subway', x,y, xi,yi), xi,yi)
+        list = list.concat(shortest_path('subway', x,y, xi,yi))
         if (JSON.parse(getCurrentWeather())['condition'] === 'normal') {
-            list = verify_position(shortest_path('walk',x,y,xi, yi),xi, yi);
+            list =list.concat(shortest_path('walk',x,y,xi, yi));
             if (JSON.parse(getCurrentAirQuality())['condition'] === 'normal') {
-                list = verify_position(shortest_path('bike', x, y, xi, yi),xi, yi);
+                list = list.concat(shortest_path('bike', x, y, xi, yi));
             }
         }
         x = xi;
         y = yi;
-        paths.concat(list)
+        paths = paths.concat(list)
     }
     return paths;
 }
 
 function verify_position(list, json, x, y){
-    console.log(JSON.parse(json)['cars']['paths'])
-    var length = JSON.parse(json)['cars']['paths'].length;
-    var postion = JSON.parse(json)['cars']['paths'][length - 1];
-    if (Math.abs(postion['x']- x) < 1.5 && Math.abs(postion['y'] - y)) {
-        return list.concat(json);
+    //console.log(JSON.parse(json)['cars']['paths'])
+    var length = JSON.parse(json)['cars'][0]['paths'].length;
+    var postion = JSON.parse(json)['cars'][0]['paths'][length - 1];
+
+    if ((Math.abs(postion[0]- x) < 1.5) && (Math.abs(postion[1] - y) < 1.5)) {
+        list = list.concat(json);
+        console.log(list)
     }
     return list;
 }
@@ -163,7 +166,7 @@ function allPossibleCases(list){
                 result.push(rest[c].unshift(list[0][i]));
             }
         }
-    return list;
+        return list;
     }
 }
 

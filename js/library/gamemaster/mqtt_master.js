@@ -34,12 +34,12 @@ function subway_one(line, state) {
 
 function road(payload){
     var json_payload = JSON.parse(payload)
-    publish(ENVIRONMENT + '/prod/city/morph/roads_status', json_payload);
+    publish('/prod/city/morph/roads_status', json_payload);
 }
 
 function close_car_road(edge_nb){
 
-    publish(ENVIRONMENT + '/prod/city/morph/roads_status', [
+    publish('/prod/city/morph/roads_status', [
       {
             car: [
                       {road: "edge_" + edge_nb, state: "close"}
@@ -49,7 +49,7 @@ function close_car_road(edge_nb){
 
 function close_bike_road(edge_nb){
 
-    publish(ENVIRONMENT + '/prod/city/morph/roads_status', [
+    publish('/prod/city/morph/roads_status', [
       {
             bike: [
                       {road: "edge_" + edge_nb, state: "close"}
@@ -59,7 +59,7 @@ function close_bike_road(edge_nb){
 
 function close_walk_road(edge_nb){
 
-    publish(ENVIRONMENT + '/prod/city/morph/roads_status', [
+    publish('/prod/city/morph/roads_status', [
       {
             walk: [
                       {road: "edge_" + edge_nb, state: "close"}
@@ -68,11 +68,11 @@ function close_walk_road(edge_nb){
 }
 
 function weather(condition){
-    publish(ENVIRONMENT + '/prod/context/change/weather', {condition: condition});
+    publish('/prod/context/change/weather', {condition: condition});
 }
 
 function air(condition){
-    publish(ENVIRONMENT + '/prod/context/change/air', {condition: condition});
+    publish('/prod/context/change/air', {condition: condition});
 }
 
 
