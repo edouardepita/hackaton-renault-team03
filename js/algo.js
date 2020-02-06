@@ -86,6 +86,18 @@ function getVehiculeInfo(id) {
     return callApi("vehicle/api/v1/vehicles/" + id, "GET");
 }
 
+function getVehiclesList(vehicles){
+ vehicles_list = []
+ vehicles = JSON.parse(vehicles);
+ for (var index = 0; index < vehicles.length; index++)
+ {
+    var i = vehicles[index];
+    vehicles_list.push({id:i["id"], x:i["attitude"]["position"]["x"], y:i["attitude"]["position"]["y"]})
+ }
+ console.log(vehicles_list);
+ return vehicles_list;
+}
+
 //bike walk and subway
 function shortest_path(method, departure_x, departure_y, arrival_x, arrival_y) {
     var endpoint= "graph/road_graph/shortest_path/".concat(method);
