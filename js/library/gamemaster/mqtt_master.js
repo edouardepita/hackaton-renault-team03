@@ -21,6 +21,7 @@ function circulation(data){
 }
 
 function circulation_one(road, slowing_factor){
+    console.log('ralentissement de ' + road);
     circulation([{'road': 'edge_' + road, 'slowing_factor': slowing_factor}]);
 }
 
@@ -29,6 +30,7 @@ function subway(data){
 }
 
 function subway_one(line, state) {
+    console.log(state + ' de ' + line);
     subway([{"line": "edge_" + line, "state": state}])
 }
 
@@ -38,7 +40,7 @@ function road(payload){
 }
 
 function close_car_road(edge_nb){
-
+    console.log('Fermeture route ', edge_nb)
     publish('/prod/city/morph/roads_status', [
       {
             car: [
@@ -48,7 +50,7 @@ function close_car_road(edge_nb){
 }
 
 function close_bike_road(edge_nb){
-
+    console.log('Fermeture route vélo '+ edge_nb)
     publish('/prod/city/morph/roads_status', [
       {
             bike: [
@@ -58,11 +60,41 @@ function close_bike_road(edge_nb){
 }
 
 function close_walk_road(edge_nb){
-
+    console.log('Fermeture route marche ' + edge_nb)
     publish('/prod/city/morph/roads_status', [
       {
             walk: [
                       {road: "edge_" + edge_nb, state: "close"}
+                  ]
+      }]);
+}
+
+function open_car_road(edge_nb){
+    console.log('ouverture route ', edge_nb)
+    publish('/prod/city/morph/roads_status', [
+      {
+            car: [
+                      {road: "edge_" + edge_nb, state: "open"}
+                  ]
+      }]);
+}
+
+function open_bike_road(edge_nb){
+    console.log('ouverture route vélo '+ edge_nb)
+    publish('/prod/city/morph/roads_status', [
+      {
+            bike: [
+                      {road: "edge_" + edge_nb, state: "open"}
+                  ]
+      }]);
+}
+
+function open_walk_road(edge_nb){
+    console.log('ouverture route marche ' + edge_nb)
+    publish('/prod/city/morph/roads_status', [
+      {
+            walk: [
+                      {road: "edge_" + edge_nb, state: "open"}
                   ]
       }]);
 }
@@ -77,7 +109,7 @@ function air(condition){
 
 
 function start_mission(x, y){
-    reset();
+
     publish("/prod/user/mission", {
     "mission": "Votre mission, si vous l'acceptez, consiste à passer par l'ensemble des points ci dessous.",
     "positions": [
@@ -89,21 +121,111 @@ function start_mission(x, y){
 })
 }
 
+function clean_map(){
+    weather('normal');
+    console.log('météo normal');
+    air('normal');
+    console.log('météo normal');
+    var i = 0;
+    while (i < 250){
+        open_bike_road(i);
+        open_car_road(i);
+        open_walk_road(i);
+        subway_one(i, 'open');
+        circulation_one(i, 1);
+        i ++;
+    }
+
+}
+
 
 function script_auto_lev_1(){
+    reset();
     start_mission(0,0);
 }
 
 function script_auto_lev_2(){
+    reset();
+    console.log('Démarrage');
     start_mission(0,0);
+    console.log('ralentissement circulation')
     circulation_one(4, 10);
     circulation_one(6, 5);
     circulation_one(2, 7);
+    console.log('Fermeture métro')
     subway_one(1, 'close');
 }
 
-function script_auto_lev_3(){
+function sleep( millisecondsToWait )
+
+{
+
+var now = new Date().getTime();
+
+while ( new Date().getTime() < now + millisecondsToWait )
+
+{
+
+/* do nothing; this will exit once it reaches the time limit */
+
+/* if you want you could do something and exit */
 
 }
 
-function script_rand(){}
+}
+
+function script_auto_lev_3(){
+    reset();
+    sleep(1000)
+    console.log('Mission demarage')
+    start_mission(0,0);
+    weather('snow');
+    sleep(3000)
+    subway_one(1, 'close');
+    sleep(1000)
+    weather('rain');
+    sleep(500)
+    close_bike_road(4);
+    sleep(5000)
+    close_car_road(8);
+    sleep(1000)
+    close_walk_road(11);
+    sleep(3000)
+    subway_one(1, 'open');
+}
+
+function script_rand(){
+    reset()
+    clean_map()
+    while(true){
+        sleep((Math.floor(Math.random() * 10) + 1)*1000 );
+        var change = Math.floor(Math.random() * 5)
+        if (change == 0){
+            if (Math.random()){
+                open_walk_road(Math.floor(Math.random() * 100))
+            } else {
+                close_walk_road(Math.floor(Math.floor(Math.random() * 100)))
+            }
+        } else if (change == 1) {
+            if (Math.random()){
+                open_car_road(Math.floor(Math.random() * 100))
+            } else {
+                close_car_road(Math.floor(Math.floor(Math.random() * 100)))
+            }
+        } else if (change == 2) {
+            if (Math.random()){
+                open_bike_road(Math.floor(Math.random() * 100))
+            } else {
+                close_bike_road(Math.floor(Math.floor(Math.random() * 100)))
+            }
+        } else if (change== 3) {
+            if (Math.random()){
+                subway_one(Math.floor(Math.random() * 10), 'open')
+            } else {
+                subway_one(Math.floor(Math.floor(Math.random() * 10)), 'close')
+            }
+        } else if (change== 4){
+
+        }
+    }
+}
