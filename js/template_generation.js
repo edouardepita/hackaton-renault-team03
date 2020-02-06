@@ -134,7 +134,7 @@ function FpathUpdate(pathList)
 }
 
 
-function addPath(listOfPath)
+function FaddPath(listOfPath)
 {
     var pathList = [];
 

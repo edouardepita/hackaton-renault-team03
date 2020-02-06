@@ -99,7 +99,13 @@ client.on('message', function (topic, message, packet) {
     {
         case '/prod/user/mission':
         const mission = payload.mission;
+        FmissionUpdate(mission);
         checkpoints = payload.positions;
+        console.log(checkpoints);
+        var slog = allPossibleCases(get_all_paths(checkpoints));
+        FaddPath(slog);
+        console.log("iofbyvfye")
+        console.log(slog);
   //      console.log(mission, checkpoints);
         get_all_paths(checkpoints);
         break;
@@ -130,12 +136,13 @@ client.on('message', function (topic, message, packet) {
         const condition = payload.condition;
         warning = "La météo a été mise à jour, changement d'itinéraire."
 //        console.log(condition, warning);
-        $("#coucou").addClass("animated fadeOut");
+        FweatherUpdate(condition);
         break;
       case '/prod/context/change/air':
         const condition2 = payload.condition;
         warning = "La qualité de l'air a été mise à jour, changement d'itinéraire."
 //        console.log(condition2, warning);
+        FpollutionUpdate(condition2);
         break;
       case '/prod/environment/change/roads_status':
         warning = "Un ou plusieurs incident(s) de la ville ont été détecté(s), changement d'itinéraire. (fermeture/ouverture de voies de circulation)";
